@@ -56,6 +56,52 @@ class Graph {
         return finalTraversedList;
     }
 
+    dfsGraphTraversalIterative(startNode) {
+        let finalTraversedList = [];
+        let visitedObject = {};
+        let nodesStack = [startNode];
+        visitedObject[startNode] = true;
+
+        while (nodesStack.length !== 0) {
+            const vertex = nodesStack.pop();
+            finalTraversedList.push(vertex);
+
+
+            this.adjacencyList[vertex].forEach(node => {
+                if (!visitedObject[node]) {
+                    visitedObject[node] = true;
+                    nodesStack.push(node);
+                }
+            })
+
+        }
+
+        return finalTraversedList;
+    }
+
+    bfsGraphTraversalIterative(startNode) {
+        let finalTraversedList = [];
+        let visitedObject = {};
+        let nodesStack = [startNode];
+        visitedObject[startNode] = true;
+
+        while (nodesStack.length !== 0) {
+            const vertex = nodesStack.shift();
+            finalTraversedList.push(vertex);
+
+
+            this.adjacencyList[vertex].forEach(node => {
+                if (!visitedObject[node]) {
+                    visitedObject[node] = true;
+                    nodesStack.push(node);
+                }
+            })
+
+        }
+
+        return finalTraversedList;
+    }
+
 }
 
 
@@ -97,5 +143,7 @@ module.exports = () => {
 
     //Argentina.removeVertex("Mendoza");
 
-    console.log(newGraph.dfsGraphTraversal("A"));
+    // console.log(newGraph.dfsGraphTraversal("A"));
+    //console.log(newGraph.dfsGraphTraversalIterative("A"));
+    console.log(newGraph.bfsGraphTraversalIterative("A"));
 }
